@@ -1,20 +1,23 @@
 <?php
 require_once "config/koneksi.php";
+require_once "safe.php";
 if(isset($_POST['login'])){
   $username = $_POST['username'];
   $usersafe = sqlsafe(Con(),$username);
   $password = $_POST['password'];
   $passsafe = sqlsafe(Con(),$password);
-  $query = "SELECT * FROM user WHERE username='$usersafe' AND password='$passsafe'";
+  $query = "SELECT * FROM user WHERE username='$usersafe'";
   $get = mysqli_query(Con(),$query);
-  if(mysqli_num_rows($get)==1){
+  $data = mysqli_fetch_array($get);
+  if(password_verify($passsafe,$data['password']))
+  {
     $_SESSION['status'] = TRUE;
     $_SESSION['username'] = $username;
     header('Location: dashboard.php');
-  }
-  else{
-    header('Location: login.php');
-  }
+}else{
+  header('Location: login.php');
+}
+
 }
 else{ ?>
   <!DOCTYPE html>

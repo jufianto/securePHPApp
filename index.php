@@ -31,6 +31,8 @@
       <div class="row">
         <?php
         require_once "config/koneksi.php";
+        require_once "safe.php";
+        
         $query = "SELECT * FROM post";
         $get = mysqli_query(Con(),$query);
         foreach ($get as $data) { ?>
@@ -41,10 +43,10 @@
               <img src="<?php echo "img/".$data['gambar']; ?>" alt="" />
               <div class="caption">
                 <p align='center'>
-                  <?php echo $data['judul']; ?>
+                  <?php xecho($data['judul']); ?>
                 </p>
                 <p align='center'>
-                  <?php echo $data['isi']; ?>
+                  <?php xecho($data['isi']); ?>
                 </p>
                 <p align='center'>
 

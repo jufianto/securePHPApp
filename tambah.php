@@ -1,5 +1,6 @@
 <?php
 require_once "config/koneksi.php";
+require_once "safe.php";
 Ceklogin();
 if(isset($_POST['post'])){
   $gambar = basename($_FILES["gambar"]["name"]);
@@ -9,10 +10,14 @@ if(isset($_POST['post'])){
   $isi = $_POST['isi'];
   $isisafe = sqlsafe(Con(),$isi);
   $query = "INSERT INTO `post` (`id`,`judul`,`isi`,`gambar`)
-  VALUES (NULL,'$judul','$isi','$gambar')";
-  move_uploaded_file($_FILES["gambar"]["tmp_name"], $target_file);
-  mysqli_query(Con(),$query);
-  header('Location: dashboard.php');
+  VALUES (NULL,'$judulsafe','$isisafe','$gambar')";
+    $querya = mysqli_query(Con(),$query);
+    if($querya){
+      move_uploaded_file($_FILES["gambar"]["tmp_name"], $target_file);
+      header('Location: dashboard.php');
+  }else{
+    echo mysqli_error();
+  }
 }
 else { ?>
   <!DOCTYPE html>

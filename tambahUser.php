@@ -1,9 +1,11 @@
 <?php
 require_once "config/koneksi.php";
+require_once "safe.php";
 Ceklogin();
 if(isset($_POST['post'])){
-  $username = $_POST['username'];
-  $password = $_POST['password'];
+  $username = sqlsafe(Con(),$_POST['username']);
+  $password = sqlsafe(Con(),$_POST['password']);
+  $password = password_hash($password,PASSWORD_BCRYPT);
   $query = "INSERT INTO `user` (`username`,`password`) VALUES ('$username','$password')";
   mysqli_query(Con(),$query);
   header('Location: dashboard.php');

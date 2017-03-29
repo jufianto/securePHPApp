@@ -46,10 +46,10 @@ $data = mysqli_fetch_array($exe);
               <img src="<?php echo "img/".$data['gambar']; ?>" alt="" />
               <div class="caption">
                 <p align='left'>
-                  <h3><?php echo $data['judul']; ?></h3>
+                  <h3><?php xecho($data['judul']); ?></h3>
                 </p>
                 <p align='left'>
-                  <?php echo $data['isi']; ?>
+                  <?php xecho($data['isi']); ?>
                 </p>
               </div>
             </div>

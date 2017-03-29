@@ -1,5 +1,6 @@
 <?php
 require_once "config/koneksi.php";
+require_once "safe.php";
 Ceklogin();
 ?>
 <!DOCTYPE html>
@@ -26,6 +27,8 @@ Ceklogin();
           </div>
           <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav navbar-right">
+
+
               <li><a href="?logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
           </div>
@@ -55,8 +58,8 @@ Ceklogin();
                   foreach (mysqli_query(Con(),$query) as $data) { ?>
                     <tr>
                       <td><?php echo $no; ?></td>
-                      <td><?php echo $data['judul']; ?></td>
-                      <td><?php echo $data['isi']; ?></td>
+                      <td><?php xecho($data['judul']); ?></td>
+                      <td><?php xecho($data['isi']); ?></td>
                       <td><a class='btn btn-sm btn-info' href="edit.php?id=<?php echo $data['id']; ?>">Edit</a></td>
                       <td><a class='btn btn-sm btn-danger' href="hapus.php?id=<?php echo $data['id']; ?>">Hapus</a></td>
                     </tr>
@@ -77,7 +80,8 @@ Ceklogin();
           <div class="panel-body">
             <a href="tambahUser.php" class='btn btn-sm btn-primary'>Tambah User</a>
             <br><br>
-            <table class="table table-hover">
+            <div class="table-responsive">
+            <table class="table table-hover ">
               <tbody>
                 <tr>
                   <td>No</td>
@@ -90,14 +94,15 @@ Ceklogin();
                   foreach (mysqli_query(Con(),$query) as $data) { ?>
                     <tr>
                       <td><?php echo $no; ?></td>
-                      <td><?php echo $data['username']; ?></td>
-                      <td><?php echo $data['password']; ?></td>
+                      <td><?php xecho($data['username']); ?></td>
+                      <td><?php xecho($data['password']); ?></td>
 
                     </tr>
 
                   <?php $no++; } ?>
               </tbody>
             </table>
+          </div>
           </div>
         </div>
 
